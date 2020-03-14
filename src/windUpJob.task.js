@@ -12,7 +12,7 @@ module.exports = async (result) => {
     return Promise.resolve();
   }
 
-  const {lastRelease, commits, nextRelease, releases, notes} = result;
+  const {lastRelease, commits, nextRelease, releases} = result;
 
   core.debug(`Published ${nextRelease.type} release version ${nextRelease.version} containing ${commits.length} commits.`);
 
@@ -24,7 +24,7 @@ module.exports = async (result) => {
     core.debug(`The release was published with plugin "${release.pluginName}".`);
   }
 
-  const {version} = nextRelease;
+  const {version, notes} = nextRelease;
   const [major, minor, patch] = version.split('.');
 
   // set outputs
