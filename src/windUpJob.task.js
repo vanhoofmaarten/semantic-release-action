@@ -12,7 +12,7 @@ module.exports = async (result) => {
     return Promise.resolve();
   }
 
-  const {lastRelease, commits, nextRelease, releases} = result;
+  const {lastRelease, commits, nextRelease, releases, notes} = result;
 
   core.debug(`Published ${nextRelease.type} release version ${nextRelease.version} containing ${commits.length} commits.`);
 
@@ -33,4 +33,12 @@ module.exports = async (result) => {
   core.setOutput(outputs.new_release_major_version, major);
   core.setOutput(outputs.new_release_minor_version, minor);
   core.setOutput(outputs.new_release_patch_version, patch);
+  core.setOutput(outputs.release_notes, patch);
+
+  core.exportVariable('NEW_RELEASE_PUBLISHED', 'true');
+  core.exportVariable('RELEASE_VERSION', version);
+  core.exportVariable('RELEASE_MAJOR', major);
+  core.exportVariable('RELEASE_MINOR', minor);
+  core.exportVariable('RELEASE_PATCH', patch);
+  core.exportVariable('RELEASE_NOTES', notes);
 };
